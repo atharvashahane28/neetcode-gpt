@@ -6,12 +6,12 @@ class Solution:
     def get_model_prediction(self, X: NDArray[np.float64], weights: NDArray[np.float64]) -> NDArray[np.float64]:
         # X is (n, m), weights is (m,) -> return (n,) predictions
         # Round to 5 decimal places
-        logits = np.dot(X, weights)
-        return np.round(logits, 5)
+        logits = np.matmul(X, weights)  # use np.matmul instead of np.dot for matrix multiplications
+        return np.round(logits, 5)      # use np.round() instead of normal Python round()
 
     def get_error(self, model_prediction: NDArray[np.float64], ground_truth: NDArray[np.float64]) -> float:
         # Compute mean squared error between predictions and ground truth
         # Round to 5 decimal places
         N = ground_truth.shape[0]
-        mse = 1 / N * np.sum(np.pow(model_prediction - ground_truth, 2))
+        mse = np.mean(np.pow(model_prediction - ground_truth, 2))
         return np.round(mse, 5)
