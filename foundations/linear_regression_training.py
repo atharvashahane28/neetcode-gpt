@@ -5,6 +5,7 @@ from numpy.typing import NDArray
 class Solution:
     def get_derivative(self, model_prediction: NDArray[np.float64], ground_truth: NDArray[np.float64], N: int, X: NDArray[np.float64]) -> float:
         # note that N is just len(X)
+        # I removed the desired_weight parameter to vectorize the operation
         return -2 * np.matmul(ground_truth - model_prediction, X) / N
 
     def get_model_prediction(self, X: NDArray[np.float64], weights: NDArray[np.float64]) -> NDArray[np.float64]:
@@ -27,14 +28,6 @@ class Solution:
         weights = initial_weights
         for _ in range(num_iterations):
             predictions = self.get_model_prediction(X=X, weights=weights)
-            # for weight_idx in range(len(weights)):
-            #     gradient = self.get_derivative(
-            #         model_prediction=predictions,
-            #         ground_truth=Y,
-            #         N=X.shape[0],
-            #         X=X,
-            #         desired_weight=weight_idx
-            #     )
             gradient = self.get_derivative(
                 model_prediction=predictions,
                 ground_truth=Y,
