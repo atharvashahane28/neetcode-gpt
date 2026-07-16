@@ -10,8 +10,8 @@ class Solution:
         # return round(your_answer, 4)
         N = y_true.shape[0]
         summation = np.sum(y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred))
-        loss = -1 / N * summation
-        return round(loss, 4)
+        loss = -1 / N * summation       # you could also just use np.mean() directly
+        return np.round(loss, 4)        # use np.round(), not normal Python round()
 
     def categorical_cross_entropy(self, y_true: NDArray[np.float64], y_pred: NDArray[np.float64]) -> float:
         # y_true: one-hot encoded true labels (shape: n_samples x n_classes)
@@ -22,4 +22,4 @@ class Solution:
         mult = y_true * np.log(y_pred)      # calculate the inner product
         summation = np.sum(mult)            # np.sum() adds all elements together and returns a single number
         loss = -1 / N * summation
-        return round(loss, 4)
+        return np.round(loss, 4)
