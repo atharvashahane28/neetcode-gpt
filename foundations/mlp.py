@@ -12,12 +12,13 @@ class Solution:
         # return np.round(your_answer, 5)
         
         def relu(z):
+            # Returns ReLU(z)
             zeros = np.zeros(z.shape[0])
             return np.maximum(zeros, z)
 
         num_layers = len(weights)
         z = x
         for i in range(num_layers):
-            nxt = relu(z @ weights[i] + biases[i])
+            nxt = relu(z @ weights[i] + biases[i])      # calculate current logits/neurons/activations
             z = nxt
-        return z
+        return np.round(z, 5)
