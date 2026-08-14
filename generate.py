@@ -28,6 +28,9 @@ class Solution:
             context = torch.cat((context, next_token), dim=-1)
             res.append(int_to_char[next_token.item()])
         
-        return "".join(res)
+        ret = ""
+        for ch in res:
+            ret += ch
+        return ret
 
         # Once your code passes the test, check out the Colab link to see your code generate new Drake lyrics!
