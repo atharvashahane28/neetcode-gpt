@@ -49,6 +49,7 @@ class CachedAttention(nn.Module):
         # NOTE: Don't forget the `/ math.sqrt(full_k.shape[-1])` term! This is part of the attentions formula present in Neetcode but not in 3Blue1Brown
         # attentions: (batch_size, new_seq_len, total_seq_len)
         # Then, to find the vectors to be added to x, we need to mat-mul the attention matrix with full_v
+        # Mistake in the question - this should have been masked but isn't
         attentions = nn.functional.softmax(q @ full_k.transpose(-1, -2) / math.sqrt(full_k.shape[-1]), dim=2)
         additions = attentions @ full_v
         return torch.round(additions, decimals=4), kv_cache
